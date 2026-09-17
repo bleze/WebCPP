@@ -19,6 +19,7 @@ namespace web
 
 	ListView::~ListView()
 	{
+		selectionChanged = nullptr;
 		root.reset();
 	}
 
@@ -84,6 +85,7 @@ namespace web
 
 	void ListView::onBodyKeyDown(Event* event)
 	{
+		auto pin = shared_from_this();
 		int keyCode = event->handle["keyCode"].as<int>();
 		bool processed = true;
 		if (keyCode == 13) // Enter
@@ -253,6 +255,7 @@ namespace web
 
 	void ListView::onItemClick(ListViewItem* item, Event* event)
 	{
+		auto pin = shared_from_this();
 		int detail = event->handle["detail"].as<int>();
 		event->stopPropagation();
 
